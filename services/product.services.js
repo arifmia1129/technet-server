@@ -17,6 +17,14 @@ module.exports.createNewProductService = async (product) => {
   return result;
 };
 
+module.exports.addCommentService = async (id, comment) => {
+  const product = await Product.findById(id);
+
+  product.comments.push(comment);
+
+  await product.save();
+};
+
 module.exports.getProductByIdService = async (id) => {
   const result = await Product.findById(id);
   return result;

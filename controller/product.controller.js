@@ -6,6 +6,7 @@ const {
   deleteProductService,
   bulkDeleteProductService,
   getProductByIdService,
+  addCommentService,
 } = require("../services/product.services");
 
 module.exports.getProduct = async (req, res, next) => {
@@ -61,8 +62,6 @@ module.exports.createProduct = async (req, res, next) => {
   try {
     const result = await createNewProductService(req.body);
 
-    result.logger();
-
     res.status(200).json({
       status: "success",
       message: "Product saved successfully",
@@ -72,6 +71,27 @@ module.exports.createProduct = async (req, res, next) => {
     res.status(400).json({
       status: "fail",
       message: "Product is not inserted",
+      error: error.message,
+    });
+  }
+};
+
+module.exports.addCommand = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+    const { comment } = req.body;
+
+    const result = await addCommentService(productId, comment);
+
+    res.status(200).json({
+      status: "success",
+      message: "Command saved successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Command is not inserted",
       error: error.message,
     });
   }

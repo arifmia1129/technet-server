@@ -21,6 +21,11 @@ const productSchema = new Schema(
         required: true,
       },
     ],
+    comments: [
+      {
+        type: String,
+      },
+    ],
     status: {
       type: Boolean,
       required: true,

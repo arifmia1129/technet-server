@@ -15,4 +15,6 @@ router
   .patch(productController.updateProduct)
   .delete(productController.deleteProduct);
 
+router.post("/:productId/comment", productController.addCommand);
+
 module.exports = router;
